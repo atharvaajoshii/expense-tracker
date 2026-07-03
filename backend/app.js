@@ -3,7 +3,7 @@ const pool = require("./config/db")
 const express = require("express")
 const app = express();
 const authRoutes = require("./routers/authRouter")
-
+app.use(express.json());
 
 pool.connect().then((client) => { console.log("conneted to db"); client.close }).catch((err) => { console.log("cant connect to db: ", err) })
 
