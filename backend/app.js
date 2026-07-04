@@ -4,6 +4,8 @@ const express = require("express")
 const app = express();
 const cors = require("cors");
 const authRoutes = require("./routers/authRouter")
+const accountRoutes = require("./routers/accountRouter")
+
 app.use(express.json());
 
 app.use(cors({
@@ -23,6 +25,7 @@ app.use((req, res, next) => {
 
 
 app.use("/expense-tracker/auth",authRoutes)
+app.use("/expense-tracker/accounts",accountRoutes)
 
 
 app.listen(5000, () => {

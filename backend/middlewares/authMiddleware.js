@@ -11,7 +11,7 @@ const authMiddleware = async (req, res, next) => {
             return res.status(401).json({ message: "token not provided" })
         }
         const decoded = jwt.verify(token, process.env.SECRETKEY)
-        const result = await pool.query("select id, name, username, email FROM users where id=$1", [decoded.id])
+        const result = await pool.query("select id, name, username, email FROM users where id=$1", [decoded.userId])
         if (result.rows.length === 0) {
             return res.status(404).json({ message: "usernot found!" })
         }
