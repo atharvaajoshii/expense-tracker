@@ -4,10 +4,11 @@ const dotenv = require("dotenv");
 
 require("dotenv").config();
 console.log(process.env.PG_PASSWORD)
+
 const pool = new Pool({
     user: "postgres",
     host: "localhost",
-    database: "expense_tracker",
+    database: "Expense-tracker",
     password: process.env.PG_PASSWORD,
     port: 5432,
 

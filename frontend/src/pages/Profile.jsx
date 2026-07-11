@@ -1,6 +1,6 @@
 import React from "react";
 import authService from "../services/authService";
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function Profile(){
         const navigate = useNavigate();
@@ -17,7 +17,8 @@ function Profile(){
     return(
         <div>
             <h1>Profile</h1>
-            <button onClick={handleLogout}>logout</button>
+            <button onClick={handleLogout}>logout</button><br />
+            <Link to="/accounts">Accounts</Link>
         </div>
     )
 }

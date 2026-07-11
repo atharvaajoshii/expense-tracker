@@ -8,7 +8,7 @@ const getAccounts = async (req, res) => {
     try {
         const userId = req.user.id;
         console.log("user id : ", userId)
-        const result = await pool.query("select * from accounts where user_id=$1 ", [userId])
+        const result = await pool.query("select * from accounts where user_id=$1 order by account_id ", [userId])
         if (result.rows.length === 0) {
             return res.status(404).json({
                 message: "account not found under this user",
@@ -44,7 +44,7 @@ const createAccount = async (req, res) => {
             message: "account created!",
             account: account.rows[0],
         })
-        console.log("account added: ", account)
+        console.log("account added: ", account.rows)
 
     } catch (error) {
         console.error(error);
@@ -127,4 +127,17 @@ const deleteAccount = async (req, res) => {
 
 }
 
-module.exports = { getAccounts, createAccount, updateAccount, deleteAccount }
+
+const getAccountById = async (req,res)=>{
+    try {
+        const accountid = req.params.id 
+        const result = await pool.query("select * from accounts where account_id=$1",[accountid])
+        if(result.rows.length===0){return res.status(409).json({message:"account not found"})}
+        // console.log(result.rows[0])
+        res.status(200).json(result.rows[0])
+    } catch (error) {
+        
+    }
+}
+
+module.exports = {getAccountById, getAccounts, createAccount, updateAccount, deleteAccount }
